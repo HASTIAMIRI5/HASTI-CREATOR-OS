@@ -1,0 +1,24 @@
+{
+  "name": "hasti-creator-os",
+  "version": "1.0.0",
+  "description": "AI creator workflow assistant for ideation and publishing.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "ai",
+    "creator",
+    "ideation",
+    "publishing",
+    "workflow",
+    "content"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}

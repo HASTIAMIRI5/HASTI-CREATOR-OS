@@ -1,0 +1,133 @@
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .trim();
+}
+
+function titleCase(value) {
+  return value
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+function createIdea(topic, index) {
+  const nouns = [
+    'systems',
+    'storytelling',
+    'distribution',
+    'experimentation',
+    'process design',
+    'audience trust',
+    'creative momentum',
+    'content loops',
+  ];
+
+  const hook = [
+    'Start with a practical tension',
+    'Frame it as a transformation story',
+    'Build around a repeatable operating system',
+    'Use a concrete system that can be copied',
+    'Lead with a fresh point of view',
+  ];
+
+  return {
+    title: `${titleCase(topic)} ${index + 1}`,
+    angle: `${hook[index % hook.length]} for ${nouns[index % nouns.length]} in a crowded creator market.`,
+    promise: `This idea helps the audience move from confusion to a clear, repeatable way of working.`,
+  };
+}
+
+function createPillars(topic) {
+  return [
+    `Foundational lessons for ${topic}`,
+    `Real-world examples and case studies`,
+    `Practical frameworks that are easy to implement`,
+    `Audience feedback loops and iterative improvements`,
+  ];
+}
+
+function createChannels(channels) {
+  return channels.map((channel) => ({
+    name: channel,
+    objective: `Use ${channel} to explain the core value of the idea in short, tactical, and useful content.`,
+  }));
+}
+
+function buildPublishingPlan(topic, channels) {
+  return [
+    {
+      week: 1,
+      focus: `Validate the core narrative around ${topic}`,
+      deliverables: [
+        'Draft the main promise and audience problem',
+        'Create 3 strong hooks for social content',
+        'Collect 5 audience questions to answer',
+      ],
+      channels,
+    },
+    {
+      week: 2,
+      focus: `Turn the idea into practical utility`,
+      deliverables: [
+        'Publish one deep guide',
+        'Share one short-form post per platform',
+        'Create a resource or checklist',
+      ],
+      channels,
+    },
+    {
+      week: 3,
+      focus: `Build trust and authority`,
+      deliverables: [
+        'Publish a behind-the-scenes or case-study post',
+        'Feature a testimony or example from the field',
+        'Ask for feedback and repurpose replies into new content',
+      ],
+      channels,
+    },
+  ];
+}
+
+function generateCreatorPlan({ topic, audience, tone, channels }) {
+  const safeTopic = topic.trim();
+  const safeAudience = audience.trim();
+  const safeTone = tone.trim();
+  const safeChannels = channels.map((channel) => channel.toString().trim()).filter(Boolean);
+
+  const ideas = Array.from({ length: 3 }, (_, index) => createIdea(safeTopic, index));
+  const contentPillars = createPillars(safeTopic);
+  const publishingPlan = buildPublishingPlan(safeTopic, safeChannels);
+
+  return {
+    title: titleCase(safeTopic),
+    slug: slugify(safeTopic),
+    summary: `A creator strategy for ${safeTopic} aimed at ${safeAudience}, delivered in a ${safeTone} tone with a practical publishing rhythm.`,
+    audience: safeAudience,
+    tone: safeTone,
+    ideas,
+    contentPillars,
+    channels: createChannels(safeChannels),
+    publishingPlan,
+    workflow: [
+      'Clarify the audience problem and the transformation you promise.',
+      'Choose the strongest idea angle and define the core narrative.',
+      'Build 3 content pillars that support the story with real value.',
+      'Publish a first batch across your key channels and track feedback.',
+      'Refine the best-performing pieces and turn them into a repeatable content loop.',
+    ],
+    nextActions: [
+      `Draft the first hook for ${safeTopic} in under 2 paragraphs.`,
+      `List the top 5 questions your audience asks about ${safeTopic}.`,
+      `Pick the best-performing channel and build a simple 30-day release schedule.`,
+      `Document a clear call-to-action that turns attention into trust and conversion.`,
+    ],
+  };
+}
+
+module.exports = {
+  generateCreatorPlan,
+};

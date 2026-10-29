@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hasti Creator OS</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow">Creator OS</span>
+          <h1>Hasti Creator OS</h1>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel form-panel">
+          <h2>Build your creator workflow</h2>
+          <form id="plan-form">
+            <label>
+              Topic
+              <input type="text" name="topic" placeholder="AI productivity workflows" required />
+            </label>
+
+            <label>
+              Audience
+              <input type="text" name="audience" placeholder="founders and creators" />
+            </label>
+
+            <label>
+              Tone
+              <input type="text" name="tone" placeholder="confident and practical" />
+            </label>
+
+            <label>
+              Channels
+              <input type="text" name="channels" placeholder="blog, linkedin, newsletter" />
+            </label>
+
+            <button type="submit">Generate plan</button>
+          </form>
+        </section>
+
+        <section class="panel output-panel">
+          <div id="status" class="status">Ready to generate a creator plan.</div>
+          <div id="output" class="output empty">Your strategy results will appear here.</div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
